@@ -36,6 +36,14 @@ public class NumbersApiSpecifications {
                 .build();
     }
 
+    public static RequestSpecification requestSpecificationNumberNegative() {
+        return new RequestSpecBuilder()
+                .addHeader("Request URI", MAIN_URL + NUMBER_URL)
+                .addPathParam("id", 3)
+                .setBaseUri(MAIN_URL)
+                .build();
+    }
+
     public static RequestSpecification requestSpecificationDate() {
 
         return new RequestSpecBuilder()
@@ -44,11 +52,27 @@ public class NumbersApiSpecifications {
                 .build();
     }
 
+    public static RequestSpecification requestSpecificationDateNegative() {
+
+        return new RequestSpecBuilder()
+                .addHeader("Request URI", MAIN_URL + DATE_URL)
+                .setBaseUri(DATE_URL)
+                .build();
+    }
+
     public static RequestSpecification requestSpecificationMath() {
 
         return new RequestSpecBuilder()
                 .addHeader("Request URI", MAIN_URL + MATH_URL)
                 .setBaseUri(MAIN_URL)
+                .build();
+    }
+
+    public static RequestSpecification requestSpecificationMathNegative() {
+
+        return new RequestSpecBuilder()
+                .addHeader("Request URI", MAIN_URL + MATH_URL)
+                .setBaseUri(CONTENT_TYPE)
                 .build();
     }
 
@@ -67,10 +91,16 @@ public class NumbersApiSpecifications {
                 .build();
     }
 
-    public static ResponseSpecification responseSpecificationNumber(){
+    public static ResponseSpecification responseSpecificationNumber() {
         return new ResponseSpecBuilder()
                 .expectHeader("X-Numbers-API-Type", "trivia")
                 .expectHeader("X-Numbers-API-Number", "2")
+                .build();
+    }
+
+    public static ResponseSpecification responseSpecificationNumberNegative() {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(300)
                 .build();
     }
 
@@ -81,11 +111,25 @@ public class NumbersApiSpecifications {
                 .build();
     }
 
+    public static ResponseSpecification responseSpecificationDateNegative() {
+        return new ResponseSpecBuilder()
+                .expectHeader("Content-Type", "text/plain8")
+                .build();
+    }
+
     public static ResponseSpecification responseSpecificationMath() {
         return new ResponseSpecBuilder()
 
                 .expectHeader("X-Numbers-API-Type", "math")
                 .expectHeader("X-Numbers-API-Number", "8")
+                .build();
+    }
+
+    public static ResponseSpecification responseSpecificationMathNegative() {
+        return new ResponseSpecBuilder()
+
+                .expectHeader("Expires", "1")
+//                .expectHeader("X-Numbers-API-Number", "8")
                 .build();
     }
 
