@@ -10,8 +10,13 @@ public class NumbersApiSpecifications {
     public static final String MAIN_URL = "http://numbersapi.com";
     public static final String NUMBER_URL = "/2";
     public static final String DATE_URL = "/8/27/date";
+    public static final int DATE_MONTH_URL= 8;
+    public static final int DATE_DAY_URL = 27;
     public static final String MATH_URL = "/8/math";
     public static final String CONTENT_TYPE = "text/plain; charset=utf-8";
+    public static final int NUMBER_VALUE_CORRECT = 2;
+    public static final int NUMBER_VALUE_INCORRECT = 3;
+    public static final int NUMBER_MATH = 8;
 
     public static RequestSpecification defaultRequestSpecification() {
 
@@ -25,21 +30,23 @@ public class NumbersApiSpecifications {
                 .addHeader("Host", "numbersapi.com")
                 .addHeader("Upgrade-Insecure-Requests", "1")
                 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36")
+                .log(LogDetail.ALL)
                 .build();
     }
 
     public static RequestSpecification requestSpecificationNumber() {
         return new RequestSpecBuilder()
                 .addHeader("Request URI", MAIN_URL + NUMBER_URL)
-                .addPathParam("id", 2)
+                .addPathParam("id", NUMBER_VALUE_CORRECT)
                 .setBaseUri(MAIN_URL)
                 .build();
     }
 
     public static RequestSpecification requestSpecificationNumberNegative() {
+
         return new RequestSpecBuilder()
                 .addHeader("Request URI", MAIN_URL + NUMBER_URL)
-                .addPathParam("id", 3)
+                .addPathParam("id", NUMBER_VALUE_INCORRECT)
                 .setBaseUri(MAIN_URL)
                 .build();
     }
@@ -48,6 +55,7 @@ public class NumbersApiSpecifications {
 
         return new RequestSpecBuilder()
                 .addHeader("Request URI", MAIN_URL + DATE_URL)
+                .addPathParams("month", DATE_MONTH_URL, "day", DATE_DAY_URL)
                 .setBaseUri(MAIN_URL)
                 .build();
     }
@@ -56,6 +64,7 @@ public class NumbersApiSpecifications {
 
         return new RequestSpecBuilder()
                 .addHeader("Request URI", MAIN_URL + DATE_URL)
+                .addPathParams("month", DATE_MONTH_URL, "day", DATE_DAY_URL)
                 .setBaseUri(DATE_URL)
                 .build();
     }
@@ -64,6 +73,7 @@ public class NumbersApiSpecifications {
 
         return new RequestSpecBuilder()
                 .addHeader("Request URI", MAIN_URL + MATH_URL)
+                .addPathParam("number", NUMBER_MATH)
                 .setBaseUri(MAIN_URL)
                 .build();
     }
@@ -72,6 +82,7 @@ public class NumbersApiSpecifications {
 
         return new RequestSpecBuilder()
                 .addHeader("Request URI", MAIN_URL + MATH_URL)
+                .addPathParam("number", NUMBER_MATH)
                 .setBaseUri(CONTENT_TYPE)
                 .build();
     }
@@ -129,7 +140,6 @@ public class NumbersApiSpecifications {
         return new ResponseSpecBuilder()
 
                 .expectHeader("Expires", "1")
-//                .expectHeader("X-Numbers-API-Number", "8")
                 .build();
     }
 

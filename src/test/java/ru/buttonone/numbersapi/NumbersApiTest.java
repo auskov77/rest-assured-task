@@ -14,6 +14,8 @@ public class NumbersApiTest {
     public static final String DATE_URL = "8/27/date";
     public static final String MATH_URL = "8/math";
     public static final String ID_PATH = "/{id}";
+    public static final String DATE_URL_PATH = "/{month}/{day}/date";
+    public static final String MATH_URL_PATH = "/{number}/math";
 
     @DisplayName("rest assured positive test - " + MAIN_URL + "/" + NUMBER_URL)
     @Test
@@ -65,12 +67,13 @@ public class NumbersApiTest {
                 .spec(defaultRequestSpecification())
                 .spec(requestSpecificationDate())
                 .when()
-                .get("/" + DATE_URL)
+                .get(DATE_URL_PATH)
                 .then()
                 .contentType(ContentType.TEXT)
                 .spec(defaultResponseSpecification())
                 .spec(responseSpecificationDate());
     }
+//    public static final String DATE_URL_PATH = "/{month}/{day}/date";
 
     @DisplayName("rest assured negative test 1 - " + MAIN_URL + "/" + DATE_URL)
     @Test
@@ -79,7 +82,7 @@ public class NumbersApiTest {
                 .spec(defaultRequestSpecification())
                 .spec(requestSpecificationDateNegative())
                 .when()
-                .get("/" + DATE_URL)
+                .get(DATE_URL_PATH)
                 .then()
                 .contentType(ContentType.TEXT)
                 .spec(defaultResponseSpecification())
@@ -92,7 +95,7 @@ public class NumbersApiTest {
         given()
                 .spec(defaultRequestSpecification())
                 .when()
-                .get("/" + DATE_URL)
+                .get(DATE_URL_PATH)
                 .then()
                 .contentType(ContentType.TEXT)
                 .spec(responseSpecificationDateNegative());
@@ -105,7 +108,7 @@ public class NumbersApiTest {
                 .spec(defaultRequestSpecification())
                 .spec(requestSpecificationMath())
                 .when()
-                .get("/" + MATH_URL)
+                .get(MATH_URL_PATH)
                 .then()
                 .contentType(ContentType.TEXT)
                 .spec(defaultResponseSpecification())
@@ -118,7 +121,7 @@ public class NumbersApiTest {
         given()
                 .spec(requestSpecificationMathNegative())
                 .when()
-                .get("/" + MATH_URL)
+                .get(MATH_URL_PATH)
                 .then()
                 .contentType(ContentType.TEXT)
                 .spec(defaultResponseSpecification())
@@ -132,7 +135,7 @@ public class NumbersApiTest {
                 .spec(defaultRequestSpecification())
                 .spec(requestSpecificationMath())
                 .when()
-                .get("/" + MATH_URL)
+                .get(MATH_URL_PATH)
                 .then()
                 .contentType(ContentType.TEXT)
                 .spec(responseSpecificationMathNegative());
